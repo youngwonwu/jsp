@@ -1,0 +1,17 @@
+create table messages (
+    msg_id number,
+    content VARCHAR2(100),
+    writer varchar2(30),
+    create_date date
+);
+
+create sequence mess_seq;
+
+insert into messages values(mess_seq.nextval, 'text'||mess_seq.currval, 'user1', sysdate);
+
+COMMIT;
+
+select * from messages order by 1;
+
+select to_char(create_date, 'yyyy-mm-dd hh24:mi:ss') as dataes, msg_id, content, writer from messages
+where create_date >= sysdate - (1/24/60)*5;     --5분전 데이터를 가져 오겠다
