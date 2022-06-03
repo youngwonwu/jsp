@@ -1,0 +1,23 @@
+--todolist 저장, 수정, 삭제,          
+--테이블 구성, 서블릿, DAO, todolist.html 완성
+drop table todolist PURGE;
+
+create table todolist (
+    todo_id number,
+    content VARCHAR2(100),
+    Y_N CHAR(1)
+);
+
+create sequence todo_seq;
+
+desc todolist;
+
+insert into todolist values(todo_seq.nextval, 'test', 'y');
+insert into todolist values(todo_seq.nextval, 'test1', 'n');
+
+DELETE todolist where todo_id=4;
+
+COMMIT;
+
+select * from todolist order by 1;
+select content from todolist;
