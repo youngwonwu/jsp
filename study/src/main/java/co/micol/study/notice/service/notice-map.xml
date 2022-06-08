@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="co.micol.study.notice.service.NoticeMapper">
+
+	<!-- ;(세미콜론) 안씀 -->
+	<!-- mapper에서 el표현식은 # -->
+	<select id="noticeSelectList" resultType="co.micol.study.notice.vo.NoticeVO">
+		SELECT * FROM NOTICE ORDER BY ID DESC
+	</select>
+	
+	<select id="noticeSearchList" parameterType="String" resultType="co.micol.study.notice.vo.NoticeVO">
+		SELECT * FROM NOTICE
+		WHERE 
+			<if test="key == 1"> 1 = 1</if>		<!-- 전체검색 -->
+			<if test="key == 2"> TITLE LIKE '%' || #{val} || '%'</if>
+			<if test="key == 3"> SUBJECT LIKE '%' || #{val} || '%'</if>
+	</select>
+	
+	<select id="noticeSelect" parameterType="co.micol.study.notice.vo.NoticeVO" resultType="co.micol.study.notice.vo.NoticeVO">
+		SELECT * FROM NOTICE WHERE ID = #{id}
+	</select>
+	
+	<insert id="noticeInsert" parameterType="co.micol.study.notice.vo.NoticeVO">
+		INSERT INTO NOTICE
+		VALUES(b_id.nextval, #{writer}, #{title}, #{subject}, #{wdate}, 0)
+	</insert>
+	
+	<update id="noticeUpdate" parameterType="co.micol.study.notice.vo.NoticeVO">
+		UPDATE NOTICE
+		<set>
+			<if test="writer != null">WRITER = #{writer},</if>
+			<if test="title != null">TITLE = #{title},</if>
+			<if test="subject != null">SUBJECT = #{subject},</if>
+			<if test="wdate != null">WDATE = #{wdate},</if>
+		</set>
+		WHERE ID = #{id}
+	</update>
+	
+	<delete id="noticeDelete" parameterType="co.micol.study.notice.vo.NoticeVO">
+		DELETE FROM NOTICE WHERE ID = #{id}
+	</delete>
+	
+	<update id="noticeHitUpdate" parameterType="int">
+		UPDATE NOTICE SET HIT = HIT + 1 WHERE ID = #{id}
+	</update>
+</mapper>
