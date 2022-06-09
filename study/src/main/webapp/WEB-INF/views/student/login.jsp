@@ -10,6 +10,8 @@
 
 	<div align="center">
 		<div><h1>${message }</h1></div>
+		<div><h1>${id }</h1></div>
+		<div><h1>${yedam.name }</h1></div>
 	</div>
 
 </body>

@@ -21,7 +21,7 @@ import co.micol.study.student.command.Logout;
 
 
 
-@WebServlet("*.do")		//.do로 들어오는 모든 요청은 다 처리하겠다
+@WebServlet("*.do")		//.do로 들어오는 모든 요청은 다 처리하겠다	
 public class FrontController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
@@ -33,9 +33,9 @@ public class FrontController extends HttpServlet {
     }
 
 
-	public void init(ServletConfig config) throws ServletException {
-		//map
-		map.put("/home.do", new HomeCommand());	//홈 페이지
+	public void init(ServletConfig config) throws ServletException {		//init 초기화한다는 뜻
+		//map.put(key, value)
+		map.put("/home.do", new HomeCommand());	//홈 페이지		//Command의 자식 객체 HomeCommand
 		map.put("/noticeSelectList.do", new NoticeSelectList());	//공지사항 목록
 		map.put("/noticeSelect.do", new NoticeSelect());	//세부내역 보기
 		map.put("/loginForm.do", new LoginForm());	//로그인 폼
