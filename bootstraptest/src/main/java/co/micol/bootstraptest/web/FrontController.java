@@ -13,6 +13,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import co.micol.bootstraptest.command.Command;
 import co.micol.bootstraptest.home.Home;
+import co.micol.bootstraptest.notice.command.AjaxSearchList;
+import co.micol.bootstraptest.notice.command.NoticeInput;
+import co.micol.bootstraptest.notice.command.NoticeInputForm;
+import co.micol.bootstraptest.notice.command.NoticeList;
 
 /**
  * Servlet implementation class FrontController
@@ -30,6 +34,10 @@ public class FrontController extends HttpServlet {
 	public void init(ServletConfig config) throws ServletException {
 		// 실행명령 두는 곳
 		map.put("/home.do", new Home());	//처음들어오는 곳 처리
+		map.put("/noticeInputForm.do", new NoticeInputForm());	//게시글 입력 폼
+		map.put("/noticeInput.do", new NoticeInput());	//게시글 저장
+		map.put("/noticeList.do", new NoticeList());	//게시글 목록
+		map.put("/ajaxSearchList.do", new AjaxSearchList());	//게시글 검색
 		
 	}
 
@@ -46,9 +54,14 @@ public class FrontController extends HttpServlet {
 		if(!viewPage.endsWith(".do")) {
 			if(viewPage.startsWith("ajax:")) {
 				//ajax 처리
+				response.setContentType("text/html; charset=UTF-8");
+				viewPage = viewPage.substring(5);	//왜...??
+				response.getWriter().append(viewPage);
+				return;
 				
 			} else {
-				viewPage = viewPage + ".tiles";
+				//viewPage = viewPage + ".tiles";
+				viewPage = "/WEB-INF/views/" + viewPage + ".jsp";
 			}
 		}
 		

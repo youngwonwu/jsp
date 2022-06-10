@@ -724,7 +724,10 @@
 
 <body>
 	
-	<div align="center"><h1>여기 시작하는 곳</h1></div>
+	<div align="center">
+		<h1>여기 시작하는 곳</h1>
+		<h3><a href="noticeList.do">게시글 목록</a></h3>
+	</div>
 	
 </body>
 
